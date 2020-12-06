@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
-import CounterText from './components/CounterText';
 
 export default function App() {
   let [count, setCount] = useState(0);
@@ -33,10 +32,6 @@ export default function App() {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={resetButtonPressed}>
-        <CounterText color='red' fontSize={30}>
-          {count}
-        </CounterText>
-
         <Text style={{ fontSize: 70, color: 'white', textAlign: 'center' }}>
           {count}
         </Text>

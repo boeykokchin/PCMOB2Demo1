@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "text-app",
-    "slug": "text-app",
+    "name": "PCMOB2Demo1",
+    "slug": "PCMOB2Demo1",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
