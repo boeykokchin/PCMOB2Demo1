@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 
 export default function App() {
   let [count, setCount] = useState(0);
+  let [session, setSession] = useState(0);
 
   let addButtonPressed = () => {
     setCount((count += 1));
@@ -17,50 +17,91 @@ export default function App() {
     setCount(0);
   };
 
+  let firstNumber = Math.floor(Math.random() * 100);
+  let correctAnswer = Math.floor(Math.random() * 30);
+
   let showEncouragingText = () => {
     if (count >= 30) {
-      return 'You touch me 30 times! I liked!';
+      return 'Correct!';
     } else if (count >= 20) {
-      return 'You touch me 20 times already!';
+      return 'Correct!';
     } else if (count >= 10) {
-      return 'You touch me 10 times now!';
+      return 'Wrong!';
     } else {
-      return "Can't touch this!";
+      return 'Solve this!';
     }
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { marginTop: 70 }]}>
       <TouchableOpacity onPress={resetButtonPressed}>
-        <Text style={{ fontSize: 70, color: 'white', textAlign: 'center' }}>
-          {count}
-        </Text>
+        <View style={styles.buttonRow}>
+          <View style={[styles.boxNumber, { backgroundColor: 'blue' }]}>
+            <Text style={{ fontSize: 50 }}>{firstNumber}</Text>
+          </View>
+          <View style={[styles.boxSign, { backgroundColor: 'purple' }]}>
+            <Text style={{ fontSize: 50 }}>+</Text>
+          </View>
+        </View>
+
+        <View
+          style={{
+            borderStyle: 'solid',
+            borderRadius: 10,
+            borderWidth: 4,
+            borderColor: 'orange',
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 70,
+              color: 'white',
+              textAlign: 'center',
+            }}
+          >
+            {count}
+          </Text>
+        </View>
 
         <View style={styles.buttonRow}>
-          <TouchableOpacity
-            style={styles.circleButton}
-            onPress={addButtonPressed}
-          >
-            <Text style={{ fontSize: 60, color: 'green' }}>+</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.circleButton}
-            onPress={minusButtonPressed}
-          >
-            <Text style={{ fontSize: 80, color: 'red' }}>-</Text>
-          </TouchableOpacity>
+          <View style={[styles.boxSign, { backgroundColor: 'purple' }]}>
+            <Text style={{ fontSize: 50 }}>=</Text>
+          </View>
+          <View style={[styles.boxNumber, { backgroundColor: 'blue' }]}>
+            <Text style={{ fontSize: 50 }}>{firstNumber + correctAnswer}</Text>
+          </View>
         </View>
 
         <Text style={styles.text}>{showEncouragingText()}</Text>
 
-        <View style={styles.buttonRow}>
+        <View style={[styles.buttonRow, { marginTop: 100, marginBottom: 90 }]}>
           <TouchableOpacity
-            style={styles.circleButton}
-            onPress={resetButtonPressed}
+            style={[styles.circleButton, { backgroundColor: 'green' }]}
+            onPress={addButtonPressed}
           >
-            <Text style={{ fontSize: 50, color: 'red' }}>R</Text>
+            <Text style={{ fontSize: 60, color: 'white' }}>+</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.circleButton, { backgroundColor: 'red' }]}
+            onPress={minusButtonPressed}
+          >
+            <Text style={{ fontSize: 80, color: 'white' }}>-</Text>
           </TouchableOpacity>
         </View>
+
+        {
+          //   <View style={styles.buttonRow}>
+          //   <TouchableOpacity
+          //     style={[
+          //       styles.circleButton,
+          //       { borderColor: 'red', borderWidth: 6, borderStyle: 'solid' },
+          //     ]}
+          //     onPress={resetButtonPressed}
+          //   >
+          //     <Text style={{ fontSize: 50, color: 'red' }}>R</Text>
+          //   </TouchableOpacity>
+          // </View>
+        }
       </TouchableOpacity>
     </View>
   );
@@ -78,8 +119,8 @@ const styles = StyleSheet.create({
     color: 'blue',
     fontSize: 30,
     fontWeight: 'bold',
-    marginTop: 70,
-    marginBottom: 70,
+    marginTop: 40,
+    marginBottom: 10,
     textAlign: 'center',
   },
 
@@ -105,10 +146,30 @@ const styles = StyleSheet.create({
     width: 90,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: 'blue',
-    borderWidth: 2,
-    borderStyle: 'solid',
+    // borderColor: 'orange',
+    // borderWidth: 6,
+    // borderStyle: 'solid',
     borderRadius: 100,
+  },
+
+  boxNumber: {
+    margin: 1,
+    padding: 5,
+    height: 130,
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+
+  boxSign: {
+    margin: 1,
+    padding: 5,
+    height: 130,
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
   },
 
   buttonRow: {
