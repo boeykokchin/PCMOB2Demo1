@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 
 export default function App() {
   let [count, setCount] = useState(0);
-  let [session, setSession] = useState(0);
+  let [firstNumber, setFirstNumber] = useState(0);
+  let [correctAnswer, setCorrectAnswer] = useState(0);
 
   let addButtonPressed = () => {
     setCount((count += 1));
@@ -15,20 +16,15 @@ export default function App() {
 
   let resetButtonPressed = () => {
     setCount(0);
+    setFirstNumber((firstNumber = Math.floor(Math.random() * 100)));
+    setCorrectAnswer((correctAnswer = Math.floor(Math.random() * 30)));
   };
 
-  let firstNumber = Math.floor(Math.random() * 100);
-  let correctAnswer = Math.floor(Math.random() * 30);
-
-  let showEncouragingText = () => {
-    if (count >= 30) {
-      return 'Correct!';
-    } else if (count >= 20) {
-      return 'Correct!';
-    } else if (count >= 10) {
-      return 'Wrong!';
+  let showResultText = () => {
+    if (!(count === correctAnswer)) {
+      return 'Answer?';
     } else {
-      return 'Solve this!';
+      return 'Correct!';
     }
   };
 
@@ -72,7 +68,7 @@ export default function App() {
           </View>
         </View>
 
-        <Text style={styles.text}>{showEncouragingText()}</Text>
+        <Text style={styles.text}>{showResultText()}</Text>
 
         <View style={[styles.buttonRow, { marginTop: 100, marginBottom: 90 }]}>
           <TouchableOpacity
